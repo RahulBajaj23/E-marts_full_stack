@@ -38,9 +38,9 @@ const Header = () => {
                     </div>
                 </Link>
                 <div className=' flex items-center gap-3 md:gap-6'>
-                    <nav className='flex gap-3 md:gap-6 text-base md:text-lg'>
+                    <nav className=' gap-3 md:gap-6 text-base md:text-lg hidden md:flex'>
                         <Link to={""}>Home</Link>
-                        <Link to={"menu"}>Menu</Link>
+                        <Link to={"menu/64e87c96c8806291e033e9c4"}>Menu</Link>
                         <Link to={"about"}>About</Link>
                         <Link to={"contact"}>Contact</Link>
 
@@ -67,6 +67,14 @@ const Header = () => {
                                 {
                                     userData.email ? <p className='cursor-pointer text-red-700' onClick={handleLogout}>Logout ({userData.firstName})</p> : <Link to={"login"} className='whitespace-nowrap cursor-pointer text-blue-700'>Login</Link>
                                 }
+                                <nav className=' md:gap-6 text-base md:text-lg flex flex-col md:hidden'>
+                                    <Link to={""}>Home</Link>
+                                    <Link to={"menu/64e87c96c8806291e033e9c4"}>Menu</Link>
+                                    <Link to={"about"}>About</Link>
+                                    <Link to={"contact"}>Contact</Link>
+
+
+                                </nav>
 
                             </div>
                         )}

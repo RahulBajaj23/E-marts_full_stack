@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import martManimg from '../assets/grocery-image.png'
 import bikeDElivery from '../assets/motorbike-food-delivery-service-online-ordering-concept_68708-2241.avif'
 import HomeCart from '../components/homeCart'
 import { useSelector } from 'react-redux'
 import CardFeatures from '../components/cardFeatures'
 import { GrPrevious, GrNext } from 'react-icons/gr'
+import FilterProduct from '../components/filterProduct'
+import AllProducts from '../components/AllProducts'
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList)
@@ -14,6 +16,20 @@ const Home = () => {
     console.log(homecartListVegetables);
 
     const loadingArray = new Array(4).fill(null)
+    const loadingArrayFeature = new Array(10).fill(null)
+
+    const slideProduct = useRef()
+    const nextProduct = () => {
+        slideProduct.current.scrollLeft += 200
+    }
+    const prevProduct = () => {
+        slideProduct.current.scrollLeft -= 200
+    }
+
+
+
+
+
     return (
         <div className='w-full'>
             <div className='bg-black p-2 md:p-4 '>
@@ -38,6 +54,7 @@ const Home = () => {
                                 return (
                                     <HomeCart
                                         key={el._id}
+                                        id={el._id}
                                         image={el.image}
                                         name={el.name}
                                         price={el.price}
@@ -59,32 +76,28 @@ const Home = () => {
 
             </div>
             <div>
-                <div className='m-1 flex w-full items-center'>
+                <div className='m-2 flex w-full items-center'>
                     <h2 className='text-xl text-black font-semibold mb-3'>Fresh Vegetables</h2>
                     <div className='ml-auto flex gap-4 mr-2'>
-                        <button className='bg-slate-300 hover:bg-slate-400 text-lg p-1'>< GrPrevious /> </button>
-                        <button className='bg-slate-300 hover:bg-slate-400 text-lg p-1'>< GrNext /></button>
+                        <button onClick={prevProduct} className='bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded'>< GrPrevious /> </button>
+                        <button onClick={nextProduct} className='bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded'>< GrNext /></button>
                     </div>
                 </div>
-                <div className='flex gap-5 overflow-scroll'>
-                    {
-                        homecartListVegetables.map(el => {
-                            return (
-                                < CardFeatures
-                                    key={el._id}
-                                    name={el.name}
-                                    image={el.image}
-                                    price={el.price}
-
-                                />
-
-                            )
-                        })
-                    }
-
-
+                <div className='flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all' ref={slideProduct}>
+                    {homecartListVegetables[0] ? homecartListVegetables.map(el => (
+                        <CardFeatures
+                            key={el._id}
+                            id={el._id}
+                            name={el.name}
+                            image={el.image}
+                            price={el.price}
+                        />
+                    )) : loadingArrayFeature.map((el, index) => (
+                        <CardFeatures key={index} loading='loading...' />
+                    ))}
                 </div>
             </div>
+            <AllProducts header={"Your Products"} />
         </div>
 
     )
