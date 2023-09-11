@@ -10,10 +10,10 @@ import AllProducts from '../components/AllProducts'
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList)
-    console.log(productData);
+    // console.log(productData);
     const productSliceCart = productData.slice(0, 4)
     const homecartListVegetables = productData.filter(el => el.category === "Vegetables", [])
-    console.log(homecartListVegetables);
+    // console.log(homecartListVegetables);
 
     const loadingArray = new Array(4).fill(null)
     const loadingArrayFeature = new Array(10).fill(null)
@@ -65,7 +65,7 @@ const Home = () => {
                                 loadingArray.map((el, index) => {
                                     return (
                                         <HomeCart
-                                            key={index}
+                                            key={index + "loading.."}
                                             loading={"loading..."}
                                         />
                                     )
@@ -86,14 +86,14 @@ const Home = () => {
                 <div className='flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all' ref={slideProduct}>
                     {homecartListVegetables[0] ? homecartListVegetables.map(el => (
                         <CardFeatures
-                            key={el._id}
+                            key={el._id + "Vegetables"}
                             id={el._id}
                             name={el.name}
                             image={el.image}
                             price={el.price}
                         />
                     )) : loadingArrayFeature.map((el, index) => (
-                        <CardFeatures key={index} loading='loading...' />
+                        <CardFeatures key={index + "cartLoading"} loading='loading...' />
                     ))}
                 </div>
             </div>

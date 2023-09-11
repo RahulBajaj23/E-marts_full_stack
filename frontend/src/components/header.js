@@ -16,7 +16,7 @@ const Header = () => {
     // const userData = useSelector((state) => state)
     // console.log(userData);
     const userData = useSelector((state) => state.user)
-    console.log(userData.email);
+    // console.log(userData.email);
     const dispatch = useDispatch()
 
 
@@ -27,7 +27,9 @@ const Header = () => {
         dispatch(logoutRedux())
         toast("Logout successfully")
     }
-    console.log(process.env.REACT_APP_ADMIN_EMAIL);
+    // console.log(process.env.REACT_APP_ADMIN_EMAIL);
+
+    const cartItemNumber = useSelector((state) => state.product.cartItem)
 
     return (
         <header className='w-full fixed shadow-lg h-18 px-2 md:px-4 bg-white'>
@@ -47,10 +49,11 @@ const Header = () => {
 
                     </nav>
                     <div className='text-2xl relative cursor-pointer'>
-                        <BsCart4 />
-                        <div className='absolute text-white bg-red-600 -top-1 text -right-1 text-sm rounded-full m-0 p-0 h-4 w-4 text-center'>
-                            0
-                        </div>
+                        <Link to={"cart"}> <BsCart4 />
+                            <div className='absolute text-white bg-red-600 -top-1 text -right-1 text-sm rounded-full m-0 p-0 h-4 w-4 text-center'>
+                                {cartItemNumber.length}
+                            </div>
+                        </Link>
                     </div>
                     <div className='' onClick={handleshowMenu}>
                         <div

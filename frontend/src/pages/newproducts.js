@@ -84,6 +84,7 @@ const Newproducts = () => {
                     <option value={'Vegetables'}>Vegetables</option>
                     <option value={'Essentials'}>Essentials</option>
                     <option value={'Icecreams'}>Icecreams</option>
+                    <option value={'Dry Fruits'}>Dry Fruits</option>
                     <option value={'Cake'}>Cake</option>
                     <option value={'Healthcare'}>Healthcare</option>
 
