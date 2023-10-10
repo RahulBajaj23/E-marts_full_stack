@@ -16,7 +16,7 @@ const Signup = () => {
         Cpassword: "",
         image: ""
     })
-    console.log(data)
+    // console.log(data)
     const handleshowpass = () => {
         setShowpass(prev => !prev)
     }
@@ -33,7 +33,7 @@ const Signup = () => {
     }
     const handleProfileImg = async (e) => {
         const data = await Imagetobase64(e.target.files[0])
-        console.log(data)
+        // console.log(data)
 
         setdata((prev) => {
             return {
@@ -57,7 +57,7 @@ const Signup = () => {
                     body: JSON.stringify(data)
                 })
                 const resData = await fetchData.json()
-                console.log(resData);
+                // console.log(resData);
 
                 toast(resData.message)
                 if (resData.alert) {
