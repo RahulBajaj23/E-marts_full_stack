@@ -8,7 +8,7 @@ const app = express()
 app.use(cors())
 app.use(express.json({ limit: "10mb" }))
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 5000
 
 // Mongodb
 mongoose.set('strictQuery', false)
@@ -162,6 +162,10 @@ app.post("/checkout-payment",async(req,res)=>{
         res.status(err.statusCode || 500).json(err.message)
     }
 })
+
+if(process.env.NODE_ENV=="production"){
+    app.use(express.static("frontend/build"))
+}
 
 //port
 app.listen(PORT, () => {
